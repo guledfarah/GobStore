@@ -1,17 +1,39 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 25.0.1704.0
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FrontEnd", "FrontEnd", "{5DC22369-D489-40CB-AA7E-D8D53B2F1B7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gob.Web", "FrontEnd\Gob.Web\Gob.Web.csproj", "{3B322035-BD06-4406-BCC9-4290BD6189B4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{32690520-F074-4614-AEB6-BB093750E2AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gob.Services.ProductApi", "Services\Gob.Services.ProductApi\Gob.Services.ProductApi.csproj", "{80678868-B4E8-4358-A594-AA1471A8F8B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3B322035-BD06-4406-BCC9-4290BD6189B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B322035-BD06-4406-BCC9-4290BD6189B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B322035-BD06-4406-BCC9-4290BD6189B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B322035-BD06-4406-BCC9-4290BD6189B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80678868-B4E8-4358-A594-AA1471A8F8B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80678868-B4E8-4358-A594-AA1471A8F8B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80678868-B4E8-4358-A594-AA1471A8F8B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80678868-B4E8-4358-A594-AA1471A8F8B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D2E9FE77-CA1E-4FD9-96BF-9B9AD457887E}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3B322035-BD06-4406-BCC9-4290BD6189B4} = {5DC22369-D489-40CB-AA7E-D8D53B2F1B7E}
+		{80678868-B4E8-4358-A594-AA1471A8F8B5} = {32690520-F074-4614-AEB6-BB093750E2AD}
 	EndGlobalSection
 EndGlobal
