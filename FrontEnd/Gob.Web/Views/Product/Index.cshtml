@@ -30,8 +30,8 @@
                     <td>@item.CategoryName</td>
                     <td>@item.Price.ToString("c")</td>
                     <td>
-                        <a asp-action="ManageProduct" asp-route-id="@item.ProductId" class="btn btn-success"><i class="fas fa-edit"></i></a>
-                        <a asp-action="DeleteProduct" asp-route-id="@item.ProductId" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                        <a asp-action="ManageProduct" asp-route-ProductId="@item.ProductId" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                        <a asp-action="DeleteProduct" asp-route-ProductId="@item.ProductId" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
             }

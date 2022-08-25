@@ -28,15 +28,55 @@ namespace Gob.Web.Controllers
                 products = JsonConvert.DeserializeObject<List<ProductDto>>(response.Result.ToString());
             return View(products);
         }
-
-        public IActionResult DeleteProduct()
+        
+        public async Task<IActionResult> DeleteProduct(int productId)
         {
-            throw new NotImplementedException();
+            ProductDto product = new();
+            var response = await _productService.GetProductByIdAsync<ResponseDto>(productId);
+            if(response is {IsSuccess: true})
+                product = JsonConvert.DeserializeObject<ProductDto>(response.Result.ToString());
+            return View(product);
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> DeleteProduct(ProductDto productDto)
+        {
+            var response = await _productService.DeleteProductAsync<ResponseDto>(productDto.ProductId);
+            if(response is { IsSuccess: true })
+                return RedirectToAction("Index");
+            return View(productDto);
         }
 
-        public IActionResult ManageProduct(int? productId)
+        public async Task<IActionResult> ManageProduct(int productId = 0)
         {
-            throw new NotImplementedException();
+            ProductDto product = new();
+            
+            if (productId == 0)
+                return View(product);
+            
+            var response = await _productService.GetProductByIdAsync<ResponseDto>(productId);
+            if(response is {IsSuccess: true})
+                product = JsonConvert.DeserializeObject<ProductDto>(response.Result.ToString());
+            return View(product);
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> ManageProduct(ProductDto productDto)
+        {
+            if (productDto.ProductId != 0)
+            {
+                var response = await _productService.UpdateProductAsync<ResponseDto>(productDto);
+                if(response is { IsSuccess: true })
+                    return RedirectToAction("Index");
+                return View(productDto);
+            }
+            else
+            {
+                var response = await _productService.CreateProductAsync<ResponseDto>(productDto);
+                if(response is { IsSuccess: true })
+                    return RedirectToAction("Index");
+                return View(productDto);
+            }
         }
     }
 }
