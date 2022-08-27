@@ -4,9 +4,10 @@
 
 using System;
 using Duende.IdentityServer.Models;
+using Gob.Services.Identity.MainModule.Account;
 using Microsoft.AspNetCore.Mvc;
 
-namespace IdentityServerHost.Quickstart.UI
+namespace Gob.Services.Identity.MainModule
 {
     public static class Extensions
     {

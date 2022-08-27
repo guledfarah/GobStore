@@ -2,7 +2,7 @@
 // See LICENSE in the project root for license information.
 
 
-namespace IdentityServerHost.Quickstart.UI
+namespace Gob.Services.Identity.MainModule.Consent
 {
     public class ScopeViewModel
     {

@@ -3,21 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Gob.Services.ProductApi.Configs;
 using Gob.Services.ProductApi.Models;
 using Gob.Services.ProductApi.Models.Dtos;
 using Gob.Services.ProductApi.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Gob.Services.ProductApi.Controllers
 {
+    [Authorize]
     [Route("api/products")]
     public class ProductApiController : ControllerBase
     {
-        protected ResponseDto _response;
-        private IProductRepository _productRepository;
-        private ILogger _logger;
+        private readonly ResponseDto _response;
+        private readonly IProductRepository _productRepository;
+        private readonly ILogger _logger;
 
         public ProductApiController(
             IProductRepository productRepository,
@@ -110,7 +113,8 @@ namespace Gob.Services.ProductApi.Controllers
             return _response;
         }
 
-        [HttpDelete]
+        [Authorize(Roles = StaticDetail.Admin)]
+        [HttpDelete] 
         [Route("{productId}")]
         public async Task<ResponseDto> Delete(int productId)
         {

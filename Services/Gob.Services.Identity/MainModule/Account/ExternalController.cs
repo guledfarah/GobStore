@@ -19,7 +19,7 @@ using Duende.IdentityServer.Services;
 using Duende.IdentityServer.Stores;
 using Duende.IdentityServer.Test;
 
-namespace IdentityServerHost.Quickstart.UI
+namespace Gob.Services.Identity.MainModule.Account
 {
     [SecurityHeaders]
     [AllowAnonymous]

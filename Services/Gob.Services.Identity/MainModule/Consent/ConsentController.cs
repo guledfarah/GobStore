@@ -15,7 +15,7 @@ using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 using Duende.IdentityServer.Validation;
 
-namespace IdentityServerHost.Quickstart.UI
+namespace Gob.Services.Identity.MainModule.Consent
 {
     /// <summary>
     /// This controller processes the consent UI

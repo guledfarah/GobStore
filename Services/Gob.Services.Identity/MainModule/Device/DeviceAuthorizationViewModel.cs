@@ -2,7 +2,9 @@
 // See LICENSE in the project root for license information.
 
 
-namespace IdentityServerHost.Quickstart.UI
+using Gob.Services.Identity.MainModule.Consent;
+
+namespace Gob.Services.Identity.MainModule.Device
 {
     public class DeviceAuthorizationViewModel : ConsentViewModel
     {

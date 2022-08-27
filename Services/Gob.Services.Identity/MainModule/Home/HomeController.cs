@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using Duende.IdentityServer.Services;
 
-namespace IdentityServerHost.Quickstart.UI
+namespace Gob.Services.Identity.MainModule.Home
 {
     [SecurityHeaders]
     [AllowAnonymous]

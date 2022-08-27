@@ -1,3 +1,6 @@
+@using Duende.IdentityServer.Extensions
+@using Gob.Services.Identity.Configs
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model LoginViewModel
 
 <div class="login-page">
@@ -45,7 +48,15 @@
                             <button class="btn btn-secondary" name="button" value="cancel">Cancel</button>
                         </form>
                     </div>
-                </div>
+                         @{
+                             if (Context.User != null && Context.User.IsAuthenticated() && Context.User.IsInRole(StaticDetail.Admin))
+                             {
+                                 <div class="card-footer">
+                                     <a href="@Url.Action("Register", new { Model.ReturnUrl })">New User? Register</a>
+                                 </div>
+                             }
+                         }
+                             </div>
             </div>
         }
 

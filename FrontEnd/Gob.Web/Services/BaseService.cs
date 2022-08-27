@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Http.Headers;
 using System.Text;
 using Gob.Web.Configs;
 using Gob.Web.Models;
@@ -32,6 +33,11 @@ namespace Gob.Web.Services
                     requestMessage.Content = new StringContent(JsonConvert.SerializeObject(apiRequest.Data),
                         Encoding.UTF8, "application/json");
                 }
+                
+                // Add the access_token if it exist
+                if (!string.IsNullOrEmpty(apiRequest.AccessToken))
+                    client.DefaultRequestHeaders.Authorization =
+                        new AuthenticationHeaderValue("Bearer", apiRequest.AccessToken);
 
                 HttpResponseMessage responseMessage = null;
 

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Gob.Web.Models;
+﻿using Gob.Web.Models;
 using Gob.Web.Services.IServices;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -14,7 +11,7 @@ namespace Gob.Web.Controllers
     public class ProductController : Controller
     {
         private IProductService _productService;
-
+        
         public ProductController(IProductService productService)
         {
             _productService = productService;
@@ -23,7 +20,7 @@ namespace Gob.Web.Controllers
         public async Task<IActionResult> Index()
         {
             List<ProductDto> products = new();
-            var response = await _productService.GetAllProductsAsync<ResponseDto>();
+            var response = await _productService.GetAllProductsAsync<ResponseDto>(GetAccessToken().Result);
             if(response != null && response.IsSuccess)
                 products = JsonConvert.DeserializeObject<List<ProductDto>>(response.Result.ToString());
             return View(products);
@@ -32,7 +29,7 @@ namespace Gob.Web.Controllers
         public async Task<IActionResult> DeleteProduct(int productId)
         {
             ProductDto product = new();
-            var response = await _productService.GetProductByIdAsync<ResponseDto>(productId);
+            var response = await _productService.GetProductByIdAsync<ResponseDto>(productId, GetAccessToken().Result);
             if(response is {IsSuccess: true})
                 product = JsonConvert.DeserializeObject<ProductDto>(response.Result.ToString());
             return View(product);
@@ -41,7 +38,7 @@ namespace Gob.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteProduct(ProductDto productDto)
         {
-            var response = await _productService.DeleteProductAsync<ResponseDto>(productDto.ProductId);
+            var response = await _productService.DeleteProductAsync<ResponseDto>(productDto.ProductId, GetAccessToken().Result);
             if(response is { IsSuccess: true })
                 return RedirectToAction("Index");
             return View(productDto);
@@ -54,7 +51,7 @@ namespace Gob.Web.Controllers
             if (productId == 0)
                 return View(product);
             
-            var response = await _productService.GetProductByIdAsync<ResponseDto>(productId);
+            var response = await _productService.GetProductByIdAsync<ResponseDto>(productId, GetAccessToken().Result);
             if(response is {IsSuccess: true})
                 product = JsonConvert.DeserializeObject<ProductDto>(response.Result.ToString());
             return View(product);
@@ -65,18 +62,23 @@ namespace Gob.Web.Controllers
         {
             if (productDto.ProductId != 0)
             {
-                var response = await _productService.UpdateProductAsync<ResponseDto>(productDto);
+                var response = await _productService.UpdateProductAsync<ResponseDto>(productDto, GetAccessToken().Result);
                 if(response is { IsSuccess: true })
                     return RedirectToAction("Index");
                 return View(productDto);
             }
             else
             {
-                var response = await _productService.CreateProductAsync<ResponseDto>(productDto);
+                var response = await _productService.CreateProductAsync<ResponseDto>(productDto, GetAccessToken().Result);
                 if(response is { IsSuccess: true })
                     return RedirectToAction("Index");
                 return View(productDto);
             }
+        }
+
+        public async Task<string> GetAccessToken()
+        {
+            return await HttpContext.GetTokenAsync("access_token");
         }
     }
 }
