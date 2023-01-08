@@ -22,6 +22,14 @@ var connection = conStrBuilder.ConnectionString;
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connection));
 
+// Register CORS Allowed Clients
+builder.Services.AddSingleton<ICorsPolicyService>((container) => {
+    var logger = container.GetRequiredService<ILogger<DefaultCorsPolicyService>>();
+    return new DefaultCorsPolicyService(logger) {
+        AllowedOrigins = { "http://localhost:4200", "https://localhost:7144" }
+    };
+});
+
 // Register Identity
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()

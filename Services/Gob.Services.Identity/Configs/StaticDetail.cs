@@ -24,6 +24,7 @@ public static class StaticDetail
         new List<ApiScope>
         {
             new ApiScope("gobAdmin", "Gob Server"),
+            new ApiScope("productApi", "Gob Product Api Access"),
             new ApiScope("read", "Read data scope."),
             new ApiScope("write", "Write data scope."),
             new ApiScope("delete", "Delete data scope."),
@@ -54,6 +55,22 @@ public static class StaticDetail
                     IdentityServerConstants.StandardScopes.Profile,
                     IdentityServerConstants.StandardScopes.Email,
                     "gobAdmin"
+                }
+            },
+            
+            new Client
+            {
+                ClientId = "gobUI",
+                ClientSecrets = { new Secret("1700PenAve".Sha256()) },
+                AllowedGrantTypes = GrantTypes.Code,
+                RedirectUris = {"http://localhost:4200/login"},
+                PostLogoutRedirectUris = {"http://localhost:4200/signout-callback-oidc"},
+                AllowedScopes = new List<string>
+                {
+                    IdentityServerConstants.StandardScopes.OpenId,
+                    IdentityServerConstants.StandardScopes.Profile,
+                    IdentityServerConstants.StandardScopes.Email,
+                    "productApi"
                 }
             },
         };

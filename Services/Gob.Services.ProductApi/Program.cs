@@ -43,7 +43,8 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("ApiScope", policy =>
     {
         policy.RequireAuthenticatedUser();
-        policy.RequireClaim("scope", "gobAdmin");
+       // policy.RequireClaim("scope", "gobAdmin");
+        policy.RequireClaim("scope", "productApi");
     });
 });
 
